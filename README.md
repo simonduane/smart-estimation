@@ -52,7 +52,7 @@ If the methods lead to results of equivalent status, then this becomes a test of
 
 #### Step 1 - retrieval of another daily set of smart meter data
 
-The smart meter data retrieved today consists of today's opening reading and up to 48 half-hourly usage values for yesterday. These data are added to the history in the following steps.
+The smart meter data retrieved today consists of today's "opening" reading and up to 48 half-hourly usage values for "yesterday". These data are added to the history in the following steps. After a rather deep dive into real data, including an experimental determination of the actual time (UTC) at the start and end of one of these intervals, I know that the daily instalment of data inludes a meter reading somewhere around midnight and usage data for 48 intervals that combine to make a day-long interval that starts at 23:30 on the day before yesterday, and ends at 23:30 yesterday. These usages are presented on the My O\*o web-page and in their "API" datafiles as if they relate to a period stretching from one midnight to the next (UTC). But they don't (and I have the receipts to prove that).
 
 #### Step 2 - filling gap(s) in usage
 
