@@ -1,7 +1,7 @@
 # smart-estimation
 Dealing with missing smart meter data
 
-There are a few equations below. I have not tried to render them, and hope the sense of the words remains clear.
+There are a few equations below. I have not tried to render them graphically here, and hope the sense of the words remains clear.
 # The processing of smart meter data
 
 There are two aspects: monthly statements and tracking usage. Usage tracking should generate alerts - "this smart meter has stopped sending readings", or "there has been a surprisingly large change in this customer's usage", etc. These notes focus on the task of estimating readings when smart readings are unavailable. The estimates may be needed for billing, but mostly these estimates are just part of regular feedback to customers on our energy consumption. The form of that feedback is largely settled - we have been trained to expect graphs of our usage, by the month, by the day, by the half hour (depending what frequency of smart meter data retrieval we've authorised). Customers  aren't stupid, and we have ready access to our meters. We can be expected to notice if the information we're presented with is unclear, or is clearly wrong.
@@ -52,13 +52,13 @@ If the methods lead to results of equivalent status, then this becomes a test of
 
 #### Step 1 - retrieval of another daily set of smart meter data
 
-The smart meter data retrieved today consists of today's "opening" reading and up to 48 half-hourly usage values for "yesterday". These data are added to the history in the following steps. After a rather deep dive into real data, including an experimental determination of the actual time (UTC) at the start and end of one of these intervals, I know that the daily instalment of data inludes a meter reading somewhere around midnight and usage data for 48 intervals that combine to make a day-long interval that starts at 23:30 on the day before yesterday, and ends at 23:30 yesterday. These usages are presented on the My O\*o web-page and in their "API" datafiles as if they relate to a period stretching from one midnight to the next (UTC). But they don't (and I have the receipts to prove that).
+The smart meter data retrieved today consists of the opening reading for "today" and up to 48 half-hourly usage values for "yesterday". These data should be added to the history as described in the following steps. After a rather deep dive into real data, including an empirical determination of the actual time (UTC) at the start and end of one of these usage intervals, I know that the daily instalment of data inludes a meter reading somewhere "around" midnight and usage data for 48 intervals that combine to make a day-long interval that starts at 23:30 on the day before yesterday, and ends at 23:30 yesterday. To take one example, at the end of the most recent complete billing month, the closing reading for that month was taken around 00:39 UTC on the first day of the following month. The timing of the reading really is only "around" midnight. The timing of the boundaries between usage intervals is a lot more precise (good to a second or so) but they are presented on the My O\*o web-page and in their "API" datafiles as if they relate to a period stretching from one midnight to the next (UTC). They don't: the boundary between days is at 23:30. Ultimately, the particular details matter only when tying up readings and usages "within the uncertainties".
 
 #### Step 2 - filling gap(s) in usage
 
 Usage data received are given the status "smart" and added to the history. If the smart usage data have gap(s), then a model is used to predict usage value(s) which are inserted to fill the gap(s). The inserted usage has status "provisional".
 
-If a smart reading is received, that is added to the history, status "smart".
+If a smart reading is received, that is added to the history, with status "smart".
 
 #### Step 3 - calculating a reading
 
