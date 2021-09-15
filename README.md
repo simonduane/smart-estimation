@@ -2,6 +2,8 @@
 Dealing with missing smart meter data
 
 There are a few equations below. I have not tried to render them graphically here, and hope the sense of the words remains clear.
+On the one hand, I intend the following as a presentation of a logically coherent way to process smart meter data, and I aim to demonstrate this by offering working code applied to real data. On the other hand, the only such data I have access to is my own, mostly via O\*o who collect it and bill me for what I use. They collect and group the data in their own way and this presentation reflects that grouping.
+
 # The processing of smart meter data
 
 There are two aspects: monthly statements and tracking usage. Usage tracking should generate alerts - "this smart meter has stopped sending readings", or "there has been a surprisingly large change in this customer's usage", etc. These notes focus on the task of estimating readings when smart readings are unavailable. The estimates may be needed for billing, but mostly these estimates are just part of regular feedback to customers on our energy consumption. The form of that feedback is largely settled - we have been trained to expect graphs of our usage, by the month, by the day, by the half hour (depending what frequency of smart meter data retrieval we've authorised). Customers  aren't stupid, and we have ready access to our meters. We can be expected to notice if the information we're presented with is unclear, or is clearly wrong.
@@ -12,15 +14,15 @@ A closing read for the old month is obtained (e.g. by retrieval of a smart meter
 
 ## Processing once a billing month is in progress
 
-As each day passes, more smart meter data arrive. These data can be processed and the resulting information presented to the user, but how?
+As each day passes, more smart meter data arrive. These data can be processed and the resulting information presented to the user, but how best to do that?
 
 ### Uncertainty
 
-The fact is that some things are uncertain and pretending or claiming otherwise will eventually be shown to be a matter of delusion or deceit. At least one customer has objected that the presentation fails to distinguish estimates of usage from actual usage, and does not make clear when estimates have been corrected retrospectively. Among my aims in this exercise is to demonstrate one way of (I think) doing better. Overall, it reminded me (a metrologist shouldn't need reminding) that uncertainty really does have an everyday importance.
+The fact is that some things are uncertain and pretending or claiming otherwise will eventually be shown to be a matter of delusion or deceit. At least one customer has objected that the presentation fails to distinguish estimates of usage from actual usage, and does not make clear when estimates have been corrected retrospectively. Among my aims in this exercise is to demonstrate one way of (I think) doing better. Overall, it reminded me (a metrologist shouldn't need such reminding) that uncertainty really does have an everyday importance.
 
-### A mid-month snapshot
+### A mid-month snapshot: the starting point for analysing today's data
 
-By snapshot, I mean a summary of how things are after the processing of the most recently received smart data (i.e. yesterday's) has been completed, and before the retrieval of today's data. The state of play can be summarised as follows.
+By snapshot, I mean a summary of how things are after the processing of the most recently received smart data (i.e. what arrived early yesterday) has been completed, and before the retrieval of more data early today. The state of play can be summarised as follows.
 
 There is a history of daily meter readings, one for each day up to and including yesterday. Each one is the "opening" reading for the day, preferably one retrieved from the smart meter. If that retrieval failed for whatever reason, then the reading status, whatever it might be, is lower. It turns out to be sufficient to allow the status of a meter reading to be inferred or estimated, and it may also be, in a sense that will become clear, provisional. But it is not missing altogether. The reading value may in fact be the result of applying some correction to a provisional value, but we don't need to keep a full audit trail of such corrections - it is enough to allow each reading to have its status. Only provisional readings may be subject to correction. To be clear, the status of a reading in the history of all readings is one of actual, inferred, estimated or provisional. Most actual readings arrive as values retrieved from the smart meter, but they could be manual readings by the customer or by someone else. I shall pretend that the the only actual readings are smart readings, and that's what I'll call them.
 
