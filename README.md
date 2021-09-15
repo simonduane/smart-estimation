@@ -41,11 +41,11 @@ For example, one reads along the row  "$x$ is inferred" as far as the column "$y
 
 | status |                      |               |                 |                  |                    |
 | ------ | -------------------- | ------------- | --------------- | ---------------- | ------------------ |
-|        | $f(x,y)$ is          | y is smart    | y is inferred   | y is estimated   | y is provisional   |
-|        | $x$ is smart         | inferred      | inferred        | estimated        | provisional        |
-|        | $x$ is inferred      | inferred      | inferred        | estimated        | provisional        |
-|        | $x$ is estimated     | estimated     | estimated       | estimated        | provisional        |
-|        | $x$ is provisional   | provisional   | provisional     | provisional      | provisional        |
+|        | $f(x,y)$ is          | $y$ is smart  | $y$ is inferred | $y$ is estimated | $y$ is provisional |
+|        | $x$ is smart         |   inferred    |   inferred      |   estimated      |   provisional      |  
+|        | $x$ is inferred      |   inferred    |   inferred      |   estimated      |   provisional      |  
+|        | $x$ is estimated     |   estimated   |   estimated     |   estimated      |   provisional      |  
+|        | $x$ is provisional   |   provisional |   provisional   |   provisional    |   provisional      |  
 
 Sometimes, the same result can be reached by different methods, and the results might differ in both value and in status. Then, whichever method leads to the result with higher status is the one to adopt. It might be that the better method only becomes feasible when more smart data becomes available. One can think of that new data as enabling the correction of what was formerly a provisional result. The new result would be estimated or inferred. (Unless the new method involves repeated attempts to retrieve smart meter data - then a new result really could be smart.)
 
