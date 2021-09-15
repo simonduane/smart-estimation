@@ -87,7 +87,7 @@ There is one special case, if there was only one missing smart usage value betwe
 
 Full speed ahead and damn the torpedoes!
 
-On a Usage, Daily plot, each half-hour bar will be either blue (smart), green (estimated) or pink (provisional). There is no point in showing the model separately because it would just be a horizontal line. If the day is more recent than the last smart reading, the bars will be blue or pink, not green.
+On a Usage, Daily plot, each half-hour bar will be either blue (smart or inferred), green (estimated) or pink (provisional). There is no point in showing the model separately because it would just be a horizontal line. If the day is more recent than the last smart reading, the bars will be blue or pink, not green.
 
 On a Usage, Monthly plot, each daily bar will be part blue (the smart contribution) and part green (estimated) or pink (provisional). Overall, usage is blue and/or green so long as there is at least one more recent smart or inferred reading, and at least one smart or inferred reading that came before the usage. The pink stuff is only present since the most recent smart/inferred reading. The model could be shown (this would give a visual clue as to whether actual usage was broadly in line with the model predictions).
 
