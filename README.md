@@ -33,11 +33,9 @@ The initial commit of code (version 02) includes a function, `read_ovo`, which t
 
 Electricity consumption over the whole period since the smart meter was installed (and then zooming in a couple of times): 
 
-![image-20211004215605014](/home/simon/.config/Typora/typora-user-images/image-20211004215605014.png)
 
-![image-20211004215735144](/home/simon/.config/Typora/typora-user-images/image-20211004215735144.png)
 
-![image-20211004215836690](/home/simon/.config/Typora/typora-user-images/image-20211004215836690.png)
+
 
 This the same interactive graph, all I've done is zoom in to whatever took my fancy. What starts out as a wispy, apparently variable density plot (there are over 17,000 distinct datapoints being plotted here, which is surely beyond what could be resolved when I took the screenshot: this is indistinguishable from a continuous variation) is revealed, on zooming in, to have structure, and a daily pattern.
 
@@ -47,9 +45,8 @@ This the same interactive graph, all I've done is zoom in to whatever took my fa
 
 The same plot, but zooming in to another period:
 
-![image-20211004222612196](/home/simon/.config/Typora/typora-user-images/image-20211004222612196.png)
 
-![image-20211004222743085](/home/simon/.config/Typora/typora-user-images/image-20211004222743085.png)
+
 
 "It's not me, it's you" - the last plot doesn't show low consumption, it shows the zero values that my code inserted where values are missing from the smart meter data. At this stage, I offer no indication of that (and neither does Ovo in its presentation of my data). I can remedy that, and will, in the course of developing this code. Ovo would like to remedy that but, as far as I can tell, does not have the insight to know how to do that any time soon.
 
