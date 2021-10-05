@@ -72,5 +72,5 @@ The same plot, but zooming in to another period:
 
 
 
-*To be continued.*
+*To be continued...*
 
