@@ -2,13 +2,13 @@
 
 My activity on this was prompted by evident shortcomings in Ovo's handling of missing data: one day they estimated my gas consumption to be negative. Don't be fooled by the positive looking bar above "28", the value listed in the table below does not represent 15 kWh:
 
-![screenshot](/home/simon/.config/Typora/typora-user-images/image-20211005072716100.png)
+![screenshot](https://github.com/simonduane/smart-estimation/blob/main/image-20211005072716100.png)
 
-![screenshot](/home/simon/.config/Typora/typora-user-images/image-20211005072813219.png)
+![screenshot](https://github.com/simonduane/smart-estimation/blob/main/image-20211005072813219.png)
 
 the value in the table is -2.15 kWh. A gas meter cannot register a negative volume, that is simply nonsense, and I could not leave it at that. That presentation of my data has remained unchanged in the intervening 10 weeks, so I have no hesitation in calling them out on it, having pointed it out to them as soon as it appeared. Recently, the presentation of the same data on their smartphone app has improved:
 
-![screenshot](/home/simon/Downloads/Screenshot_20211005-073321.jpg)
+![screenshot](https://github.com/simonduane/smart-estimation/blob/main/Screenshot_20211005-073321.jpg)
 
 The negative value is explained, as in the screenshot. But the fact is there was no excuse for a negative estimate in the first place. The following is my attempt to explain and demonstrate how such things can be avoided. It's a work in progress, but I aim to keep this README more or less in step with the Python script as it develops.
 
