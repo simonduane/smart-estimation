@@ -1,6 +1,6 @@
 # smart-estimation (version 02, on its way to version 03)
 
-My activity on this was prompted by evident shortcomings in Ovo's handling of missing data: one day they estimated my gas consumption to be negative. Don't be fooled by the positive looking bar above "28", on the right, the value listed in the table on the left is negative, rather than nearly 15 kWh:
+My activity on this was prompted by evident shortcomings in Ovo's handling of missing data: one day they estimated my gas consumption to be negative. Don't be fooled by the positive looking bar above "28", on the right, the value listed in the table on the left is negative, rather than nearly 15 kWh. (The true value was very close to 10 kWh, the same as it had been every day since the first of the month):
 
 ![screenshot](https://github.com/simonduane/smart-estimation/blob/main/image-20211005072813219.png)
 ![screenshot](https://github.com/simonduane/smart-estimation/blob/main/image-20211005072716100.png)
