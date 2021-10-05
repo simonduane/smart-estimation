@@ -1,16 +1,15 @@
-# smart-estimation (version 02)
+# smart-estimation (version 02, on its way to version 03)
 
-My activity on this was prompted by evident shortcomings in Ovo's handling of missing data: one day they estimated my gas consumption to be negative. Don't be fooled by the positive looking bar above "28", the value listed in the table below does not represent 15 kWh:
-
-![screenshot](https://github.com/simonduane/smart-estimation/blob/main/image-20211005072716100.png)
+My activity on this was prompted by evident shortcomings in Ovo's handling of missing data: one day they estimated my gas consumption to be negative. Don't be fooled by the positive looking bar above "28", on the right, the value listed in the table on the left is negative, rather than nearly 15 kWh:
 
 ![screenshot](https://github.com/simonduane/smart-estimation/blob/main/image-20211005072813219.png)
+![screenshot](https://github.com/simonduane/smart-estimation/blob/main/image-20211005072716100.png)
 
-the value in the table is -2.15 kWh. A gas meter cannot register a negative volume, that is simply nonsense, and I could not leave it at that. That presentation of my data has remained unchanged in the intervening 10 weeks, so I have no hesitation in calling them out on it, having pointed it out to them as soon as it appeared. Recently, the presentation of the same data on their smartphone app has improved:
+A gas meter cannot register a negative volume, that is simply nonsense, and I could not leave it at that. Ovo's presentation to me of my data has remained unchanged in the intervening 10 weeks, so I have no hesitation in calling them out on it, having pointed it out to them as soon as it appeared. Very recently, the presentation of the same data in their smartphone app has improved:
 
 ![screenshot](https://github.com/simonduane/smart-estimation/blob/main/Screenshot_20211005-073321.jpg)
 
-The negative value is explained, as in the screenshot. But the fact is there was no excuse for a negative estimate in the first place. The following is my attempt to explain and demonstrate how such things can be avoided. It's a work in progress, but I aim to keep this README more or less in step with the Python script as it develops.
+Their explanation of the negative value is in the screenshot, but the fact is there is no excuse for having made a negative estimate in the first place. The following is my attempt to explain and demonstrate how such things can be avoided. It's a work in progress, but I aim to keep this README more or less in step with the Python script as it develops.
 
 I'll begin by describing what are the problems in how Ovo stores their data, an alternative (my way to store the data), and what my solution to their missing data problem looks like.
 
