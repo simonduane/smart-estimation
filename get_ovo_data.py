@@ -29,7 +29,7 @@ for ac in accounts:
             os.listdir(json_root + ac + folder)
         except FileNotFoundError:
             print("""
-SAFETY FIRST: this script won't make any directories for you
+SAFETY FIRST: this script expects you to have already made the directories
 """)
             raise
 
@@ -63,7 +63,7 @@ for ac in accounts:
             month = 12                  #... and ...
             year -= 1                   #... easy to understand
         file = f"{year}-{month:02d}"    # the loop counter
-        sleep(1+2*random())             # this is polite (but may not be needed)
+        sleep(1+2*random())             # this is polite (but not needed?)
 
     dt = datetime(yesterday.year, yesterday.month, yesterday.day)
     file = f"{dt.year}-{dt.month:02d}-{dt.day:02d}"   # NB dt hasn't changed yet
@@ -83,4 +83,5 @@ for ac in accounts:
         dt -= timedelta(days=1)
         file = f"{dt.year}-{dt.month:02d}-{dt.day:02d}"      # the loop variable
         sleep(1+2*random())
-print("Downloading of data has now finished - just log out and close browser.")
+driver.get("https://my.ovoenergy.com/login")
+print("Downloading of data has now finished - please log out.")
