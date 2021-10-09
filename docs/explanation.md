@@ -22,19 +22,15 @@ The script needs to be edited (lines 21-24) to contain information relating to y
 
 The Python selenium package is used to launch a web browser which the script then uses to navigate the API and capture data. Use of the script is possible once you have installed and configured selenium. (Insert a link to information elsewhere.)
 
-The script checks for the existence of local data directories to which it will write its output files.
+The script checks for the existence of local data directories to which it will write its output files[^1].
 
 [^1]: It doesn't create the directories for you, but it will overwrite existing files where names match. I was bitten by this and survived, but I have left this feature in, ready to bite you too. Consider yourself warned.
 
-The script launches a web browser which invites you to login
+The script launches a web browser which invites you to login[^2] to My Ovo, and then the script "drives"[^3] the browser to download the smart meter data. I have included random pauses (of 1-3 seconds duration) in the hope that this will make the interaction sufficiently human-like that the server doesn't blacklist me.
 
 [^2]: The script does not contain your login details, you have to type those in every time, and you also have to accept cookies, immediately after logging in, for the web scraping to work.
 
- to My Ovo, and then the script "drives"
-
 [^3]: Jargon that means: navigates the URLs in the API and parses what it receives.
-
- the browser to download the smart meter data. I have included random pauses (of 1-3 seconds duration) in the hope that this will make the interaction sufficiently human-like that the server doesn't blacklist me.
 
 Once the downloading has finished, the script reminds the user to log out from My Ovo.
 
@@ -42,7 +38,7 @@ The script output is described below.
 
 ### Ovo's smart meter dataset
 
-Once per day, usually in the early hours of the morning, Ovo extends the data made available via the API. As far as the files output by my script are concerned, the new data leads to one extra item in the existing current month's "daily" file (actually the old file is overwritten by a new file), and one extra "half-hourly" file. At the start of each new month, a new current "daily" file is created and updates of the old one cease.
+Once per day, usually in the early hours of the morning, Ovo extends the data made available via the API. As far as the files output by my script are concerned, the new data leads to one extra item in the existing current month's "daily" file (actually the old file is overwritten by a new file), and one extra "half-hourly" file. At the start of each new month, a new current "daily" file is created and updates of the old one cease.[^4]
 
 [^4]: NB: These names "daily" and "half-hourly" refer to the frequency of data within the file, not the frequency with which the files are created or updated.
 
@@ -54,7 +50,7 @@ The routine `smart_meters.read_ovo` reads the a local file created by this web s
 
 Smart meter communications is not completely reliable: some attempts to retrieve data fail. Further attempts may be made to retrieve the same data and sometimes succeed but, sometimes, the failure is because the data never existed in the first place. Repeated attempts to retrieve particular data are generally worth making but can't be relied on to solve the missing data problem. I believe that Ovo's missing data problem is made worse by their apparent choice to store their core information in lists. This is unhelpful, because missing data amounts to a list being short of one or more items. 
 
-A complete list can be identified as such by asking how long it is (for example, there are 48 half-hour intervals per day, and there are 31 days in the current month, October) but, if a half-hourly list contains only 47 items, it takes effort to work out which item is missing. The better choice would have been to store the same information in a dictionary, keyed on the datetime of the values. A data item can be identified as missing if and only if its timestamp is ***not*** among the keys of the dictionary.
+A complete list can be identified as such by asking how long it is (for example, there are 48 half-hour intervals per day, and there are 31 days in the current month, October) but, if a half-hourly list contains only 47 items, it takes effort to work out which item is missing. The better choice would have been to store the same information in a dictionary, keyed on the datetime of the values. A data item can be identified as missing if and only if its timestamp is ***not*** among the keys of the dictionary.[^5]
 
 [^5]: That last sentence is a little awkward to express, and I found my code immediately became clearer when I refactored things to use a flag `is_smart` instead of `missing`: a data item is processed in one way if it is smart, and another way otherwise. The other way is where estimates of usage come into play, and the trick is only to estimate where absolutely necessary. 
 
