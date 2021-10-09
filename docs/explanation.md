@@ -1,12 +1,6 @@
 ## JSON format
 
-This is used to specify the structure of smart meter data. The Ovo API is what forced me to learn about JSON, in which data objects are represented by strings. 
-
-[This]: https://www.w3schools.com/js/js_json_intro.asp
-
-seems to be as good a resource as any, and is what I used.
-
-The following table shows how JSON entities map onto Python objects in my code:
+This is used to specify the structure of smart meter data. The Ovo API is what forced me to learn about JSON, in which data objects are represented by strings. https://www.w3schools.com/js/js_json_intro.asp seems to be as good a resource as any, and what I learned is summarised in the table, which shows how JSON entities map onto Python objects in my code:
 
 | JSON                         | Python                      |
 | ---------------------------- | --------------------------- |
@@ -20,13 +14,13 @@ The following table shows how JSON entities map onto Python objects in my code:
 
 ## Web scraping
 
-The internet is a hostile environment and, up to a point, web servers make efforts to resist automated attacks. The downloading of data from a web API, a.k.a. web scraping, could be misconstrued by the server as a hostile attack and scripts need to take this into account. However the developers of the code that runs on the web servers depend on automated testing and, as a result, web servers will tolerate a degree of automated interaction, provided the "user" behaves in a plausibly human-like way. It is the responsibility of the script to do this.
+The internet is a hostile environment and, up to a point, web servers make efforts to resist automated attacks. The downloading of data from a web API, a.k.a. web scraping, could be misconstrued by the server as a hostile attack and scripts need to take this into account. However developers of the code that runs on web servers depend on automated testing and, as a result, web servers will tolerate a degree of automated interaction, provided the "user" behaves in a plausibly human-like way. It is the responsibility of the script to do this.
 
 ### `get_ovo_data.py`
 
-The script needs to be edited (lines 21-24) to contain information relating to your Ovo account and can then be run from a shell (command) prompt. It will work if you have more than one account (as I used to) but, as provided, the list of accounts has only one item, and the dictionary of account numbers has only one key/value pair. 
+The script needs to be edited (lines 21-24) to contain information relating to your Ovo account and can then be run from a shell (command) prompt. It will work if you have more than one account (as I used to) but, as provided, the list of accounts in the script has only one item, and the dictionary of account numbers has only one key/value pair. 
 
-This script uses the Python selenium package to launch a web browser which the script then uses to navigate the API and capture data. Use of this script is possible once you have installed and configured selenium. (Insert a link to information elsewhere.)
+The Python selenium package is used to launch a web browser which the script then uses to navigate the API and capture data. Use of the script is possible once you have installed and configured selenium. (Insert a link to information elsewhere.)
 
 The script checks for the existence of local data directories to which it will write its output files.
 
