@@ -20,13 +20,11 @@ The internet is a hostile environment and, up to a point, web servers make effor
 
 The script needs to be edited (lines 21-24) to contain information relating to your Ovo account and can then be run from a shell (command) prompt. It will work if you have more than one account (as I used to) but, as provided, the list of accounts in the script has only one item, and the dictionary of account numbers has only one key/value pair. 
 
-The Python selenium package is used to launch a web browser which the script then uses to navigate the API and capture data. Use of the script is possible once you have installed and configured selenium. (Insert a link to information elsewhere.)
+The Python selenium package is used to launch a web browser which the script then uses to navigate the API and capture data. Use of the script is possible once you have installed and configured selenium. More information at https://www.selenium.dev/selenium/docs/api/py/index.html.
 
-The script checks for the existence of local data directories to which it will write its output files[^1].
+The script checks for the existence of local data directories to which it will write its output files[^1]. The script launches a web browser which invites you to login[^2] to My Ovo, and then the script "drives"[^3] the browser to download the smart meter data. I have included random pauses (of 1-3 seconds duration) in the hope that this will make the interaction sufficiently human-like that the server doesn't blacklist me.
 
 [^1]: It doesn't create the directories for you, but it will overwrite existing files where names match. I was bitten by this and survived, but I have left this feature in, ready to bite you too. Consider yourself warned.
-
-The script launches a web browser which invites you to login[^2] to My Ovo, and then the script "drives"[^3] the browser to download the smart meter data. I have included random pauses (of 1-3 seconds duration) in the hope that this will make the interaction sufficiently human-like that the server doesn't blacklist me.
 
 [^2]: The script does not contain your login details, you have to type those in every time, and you also have to accept cookies, immediately after logging in, for the web scraping to work.
 
@@ -38,11 +36,9 @@ The script output is described below.
 
 ### Ovo's smart meter dataset
 
-Once per day, usually in the early hours of the morning, Ovo extends the data made available via the API. As far as the files output by my script are concerned, the new data leads to one extra item in the existing current month's "daily" file (actually the old file is overwritten by a new file), and one extra "half-hourly" file. At the start of each new month, a new current "daily" file is created and updates of the old one cease.[^4]
+Once per day, usually in the early hours of the morning, Ovo extends the data made available via the API. As far as the files output by my script are concerned, the new data leads to one extra item in the existing current month's "daily" file (actually the old file is overwritten by a new file), and one extra "half-hourly" file. At the start of each new month, a new current "daily" file is created and updates of the old one cease.[^4] Each file contains two lists, `"electricity"` and `"gas"` and each list item is a JSON object.
 
 [^4]: NB: These names "daily" and "half-hourly" refer to the frequency of data within the file, not the frequency with which the files are created or updated.
-
- Each file contains two lists, `"electricity"` and `"gas"` and each list item is a JSON object.
 
 The routine `smart_meters.read_ovo` reads the a local file created by this web scraping - it doesn't go online to do the web scraping itself. The routine returns a dictionary containing all the information in one file, information previously scraped from the web API, as key/value pairs. The point of the routine is to convert the lists into dictionaries. This conversion is the key (pun intended) to understanding and solving Ovo's missing data problem.
 
@@ -64,89 +60,11 @@ Where the information is "consumption", the time information is really an interv
 
 It is possible to regard a list of N meter readings as defining a list of N-1 consumption values. Again, it may not be immediately obvious but, because meter readings exist on their own, independent of any other reading, they are not necessarily the start or end of any period, the durations of the intervals associated with those N-1 consumption values are not necessarily all the same. Those durations are associated with the items in that list.
 
-#### Ovo's data structure
-
-Before the conversion of lists to dictionaries, Ovo's data is structured as follows:
-
-`smart = {"daily":{"electricity":{"data":[d_0, d_1, d_2, ..., d_30],`
-
-​                                                                     `"prev":false,`
-
-​                                                                     `"next":true,`
-
-​                                                                     `"prevYear":false},`
-
-​                                       `"gas":"data"[d_0, d_1, d_2, ..., d_30]},`
-
-​                                                    `"prev":false,`
-
-​                                                   `"next":true,`
-
-​                                                   `"prevYear":false}}`
-
-​                  `"half-hourly": {"electricity":{"data":[hhe_0, hhe_1, hhe_2, ..., hhe_47],`
-
-​                                                                                   `"prev":false,`
-
-​                                                                                   `"next":true},`
-
-​                                                   `"gas":{"data":[hhg_0, hhg_1, hhg_2, ..., hhg_47]},`
-
-​                                                                 `"prev":false,`
-
-​                                                                 `"next":true}}}`
-
-The lists will be shorter if some data are missing and/or the month has fewer than 31 completed days. The daily and half-hourly list items are (currently) structured as follows:
-
-`hh_i = {"consumption":0.073,`
-
-​                `"interval":{"start":"2019-12-17T00:30:00.000",`
-
-​                                         `"end":"2019-12-17T00:59:59.999"},`
-
-​                `"unit":"kwh"} `
-
-`d_i = {"hasHhData":true,`
-
-​              `"consumption":9.34,`
-
-​              `"interval":{"start":"2021-10-01T00:00:00.000",`
-
-​                                       `"end":"2021-10-01T23:59:59.999"},`
-
-​              `"cost":{"currencyUnit":"GBP",`
-
-​                              `"amount":"1.43"},`
-
-​              `"rates":{"anytime":0.1535,`
-
-​                                `"standing":0.274}} `
-
-The structure of the daily list items prior to June 2021 was a little different:
-
-`d_i = {"consumption":8.085,`
-
-​               `"interval":{"start":"2019-12-16T00:00:00.000",`
-
-​                                        `"end":"2019-12-16T23:59:59.999"},`
-
-​              `"meterReadings":{"start":0,`
-
-​                                                 `"end":8.085},`
-
-​             `"hasHhData":true,`
-
-​             `"cost":{"currencyUnit":"GBP",`
-
-​                              `"amount":"1.24"},`
-
-The half-hourly list item structure has not changed (as of 9 Oct 2021).
-
 ### My smart meter dataset
 
 Smart meter data are processed using two lists, one of reading values, and another of consumption values. Lists are actually fine, and to be preferred over dictionaries (which are slower to process), but they ***must*** be complete. So long as those lists might be incomplete, dictionaries have to be used instead. Therefore, smart meter data should be stored in dictionaries but processed as "completed" lists in which any gaps have been filled by inserting estimated values.
 
 The primary estimate is of consumption - estimated meter readings are derived by totting up the consumption (whether based on smart meter data or on estimates) since the most recent prior actual reading.
 
-The error in an estimated reading is entirely due to errors in estimated consumption, and estimation of consumption relies on modelling. The model can be as crude as you like, but it has to respect physical constraints, such as not being negative (negative consumption would be registered as positive on a different meter) and not exceeding the rating of the supply. For example my domestic electricity supply is rated at 100 A, so the maximum demand is about 25 kW, and the half-hourly consumption value really can't be bigger than 12.5 kWh (otherwise a circuit breaker somewhere should trip). Similarly, I believe mine is a U6 gas meter, so the flow is unlikely to exceed 6 m^3 per hour and the half-hourly consumption value can't be much bigger than 3 m^3 (which is about 32 kWh). The actual maximum flow rate may be lower, depending on the supply pipe size and the local gas pressure.
+The error in an estimated reading is entirely due to the errors in estimated consumption, and estimation of consumption relies on modelling. The model can be as crude as you like, but it has to respect physical constraints, such as not being negative (negative consumption would be registered on a different meter) and not exceeding the rating of the supply. For example my domestic electricity supply is rated at 100 A, and so the maximum demand is about 25 kW, and the half-hourly consumption value really can't be bigger than 12.5 kWh (otherwise a circuit breaker will trip). Similarly, I have a U6 gas meter, so the flow is unlikely to exceed 6 m^3 per hour and the half-hourly consumption value can't be much bigger than 3 m^3 (which is about 32 kWh), depending on the supply pipe size and the local supply pressure.
 
