@@ -83,3 +83,4 @@ for ac in accounts:
         dt -= timedelta(days=1)
         file = f"{dt.year}-{dt.month:02d}-{dt.day:02d}"      # the loop variable
         sleep(1+2*random())
+print("Downloading of data has now finished - please log out.")
