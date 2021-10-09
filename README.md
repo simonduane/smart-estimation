@@ -25,9 +25,7 @@ The data are processed using numpy arrays and displayed using the matplotlib. I 
 
 ## Explanations
 
-See [here]
-
-[here]: (docs/explanation.md)
+See [here](docs/explanation.md) for more information.
 
 
 
