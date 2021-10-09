@@ -17,15 +17,19 @@ The code offered here grew out of frustration at the shortcomings of my utility 
 ## Components
 
 - A Python module `smart_meters.py`, and
-- Some Python scripts.
+- Some Python scripts, including `get_ovo_data.py`
 
 ## Dependencies
 
-The data are processed using numpy arrays and displayed using the matplotlib. I see no reason why, if users like this kind of thing, something similar couldn't be implemented as a web-based application and offered by utility companies themselves. This depends on details of the algorithms used and the constraints of EventStream programming but, to the extent that I understand my own creation (I do) and event stream programming (only a bit), I am reasonably certain that it could be done. Just not by me.
+The data are processed using numpy arrays and displayed using the matplotlib. I see no reason why, if users like this kind of thing, something similar couldn't be implemented as a web-based application and offered by utility companies themselves. This depends on details of the algorithms used here and the constraints of EventStream programming but, to the extent that I understand my own creation (I do) and event stream programming (only a bit), I am reasonably certain that it could be done. Just not by me.
 
 ## Explanations
 
-<smart meter data: its structure, the implications of missing data and how to make algorithms robust even when some data are missing>
+See [here]
+
+[here]: (docs/explanation.md)
+
+
 
 ## Future developments
 
