@@ -64,11 +64,89 @@ Where the information is "consumption", the time information is really an interv
 
 It is possible to regard a list of N meter readings as defining a list of N-1 consumption values. Again, it may not be immediately obvious but, because meter readings exist on their own, independent of any other reading, they are not necessarily the start or end of any period, the durations of the intervals associated with those N-1 consumption values are not necessarily all the same. Those durations are associated with the items in that list.
 
+#### Ovo's data structure
+
+Before the conversion of lists to dictionaries, Ovo's data is structured as follows:
+
+`smart = {"daily":{"electricity":{"data":[d_0, d_1, d_2, ..., d_30],`
+
+​                                                                     `"prev":false,`
+
+​                                                                     `"next":true,`
+
+​                                                                     `"prevYear":false},`
+
+​                                       `"gas":"data"[d_0, d_1, d_2, ..., d_30]},`
+
+​                                                    `"prev":false,`
+
+​                                                   `"next":true,`
+
+​                                                   `"prevYear":false}}`
+
+​                  `"half-hourly": {"electricity":{"data":[hhe_0, hhe_1, hhe_2, ..., hhe_47],`
+
+​                                                                                   `"prev":false,`
+
+​                                                                                   `"next":true},`
+
+​                                                   `"gas":{"data":[hhg_0, hhg_1, hhg_2, ..., hhg_47]},`
+
+​                                                                 `"prev":false,`
+
+​                                                                 `"next":true}}}`
+
+The lists will be shorter if some data are missing and/or the month has fewer than 31 completed days. The daily and half-hourly list items are (currently) structured as follows:
+
+`hh_i = {"consumption":0.073,`
+
+​                `"interval":{"start":"2019-12-17T00:30:00.000",`
+
+​                                         `"end":"2019-12-17T00:59:59.999"},`
+
+​                `"unit":"kwh"} `
+
+`d_i = {"hasHhData":true,`
+
+​              `"consumption":9.34,`
+
+​              `"interval":{"start":"2021-10-01T00:00:00.000",`
+
+​                                       `"end":"2021-10-01T23:59:59.999"},`
+
+​              `"cost":{"currencyUnit":"GBP",`
+
+​                              `"amount":"1.43"},`
+
+​              `"rates":{"anytime":0.1535,`
+
+​                                `"standing":0.274}} `
+
+The structure of the daily list items prior to June 2021 was a little different:
+
+`d_i = {"consumption":8.085,`
+
+​               `"interval":{"start":"2019-12-16T00:00:00.000",`
+
+​                                        `"end":"2019-12-16T23:59:59.999"},`
+
+​              `"meterReadings":{"start":0,`
+
+​                                                 `"end":8.085},`
+
+​             `"hasHhData":true,`
+
+​             `"cost":{"currencyUnit":"GBP",`
+
+​                              `"amount":"1.24"},`
+
+The half-hourly list item structure has not changed (as of 9 Oct 2021).
+
 ### My smart meter dataset
 
 Smart meter data are processed using two lists, one of reading values, and another of consumption values. Lists are actually fine, and to be preferred over dictionaries (which are slower to process), but they ***must*** be complete. So long as those lists might be incomplete, dictionaries have to be used instead. Therefore, smart meter data should be stored in dictionaries but processed as "completed" lists in which any gaps have been filled by inserting estimated values.
 
 The primary estimate is of consumption - estimated meter readings are derived by totting up the consumption (whether based on smart meter data or on estimates) since the most recent prior actual reading.
 
-The error in an estimated reading is entirely due to the errors in estimated consumption, and estimation of consumption relies on modelling. The model can be as crude as you like, but it has to respect physical constraints, such as not being negative (negative consumption would be registered on a different meter) and not exceeding the rating of the supply. For example my domestic electricity supply is rated at 100 A, and so the maximum demand is about 25 kW, and the half-hourly consumption value really can't be bigger than 12.5 kWh (otherwise a circuit breaker will trip). Similarly, I have a U6 gas meter, so the flow is unlikely to exceed 6 m^3 per hour and the half-hourly consumption value can't be much bigger than 3 m^3 (which is about 32 kWh), depending on the supply pipe size and the local supply pressure.
+The error in an estimated reading is entirely due to errors in estimated consumption, and estimation of consumption relies on modelling. The model can be as crude as you like, but it has to respect physical constraints, such as not being negative (negative consumption would be registered as positive on a different meter) and not exceeding the rating of the supply. For example my domestic electricity supply is rated at 100 A, so the maximum demand is about 25 kW, and the half-hourly consumption value really can't be bigger than 12.5 kWh (otherwise a circuit breaker somewhere should trip). Similarly, I believe mine is a U6 gas meter, so the flow is unlikely to exceed 6 m^3 per hour and the half-hourly consumption value can't be much bigger than 3 m^3 (which is about 32 kWh). The actual maximum flow rate may be lower, depending on the supply pipe size and the local gas pressure.
 
