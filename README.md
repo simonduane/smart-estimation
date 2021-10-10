@@ -22,7 +22,7 @@ Smart meters were introduced to help users reduce their consumption of energy[^1
 
 ## Dependencies
 
-The data are processed using numpy arrays and displayed using the matplotlib. I see no reason why, if users like this kind of thing, something similar couldn't be implemented as a web-based application and offered by utility companies themselves. This depends on details of the algorithms used here and the constraints of EventStream programming. To the extent that I understand my own creation (which I do) and event stream programming (not in any detail), I am reasonably certain that it could be done - just not by me.
+The data are processed using [numpy](https://numpy.org/) arrays in [Python](https://www.python.org/) and displayed using [matplotlib](https://matplotlib.org/stable/index.html). I see no reason why, if users like this kind of thing, something similar couldn't be implemented as a web-based application and offered by utility companies themselves. This would depend on details of the algorithms used here and probably on the constraints of event stream programming. To the extent that I understand my own creation (which I do) and event stream programming (not in any detail), I am reasonably certain that it could be done - it just won't be done by me anytime soon.
 
 ## Explanations
 
@@ -32,6 +32,6 @@ See [here](docs/explanation.md) for more information.
 
 ## Future developments
 
-Some kind of user interface, possible integration of the web-scraping elements, support for tuning a model of demand, etc.
+Some kind of user interface, possible integration of the web-scraping elements, support for tuning a model of household demand, etc.
 
 Not least, FFS - just finish this alphabet joke, sooner rather than later.
