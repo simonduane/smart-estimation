@@ -5,6 +5,18 @@ Smart meters were introduced to help users reduce their consumption of energy[^1
 [^1]: The anti-capitalist cynic in me suspects that the motivation, for ensuring widespread take-up of smart meters, had a strong element of "They want to consume energy at times of peak demand? Let's make sure the bastards pay." To adapt what Marx [said](https://libquotes.com/karl-marx/quote/lbi8n2o) about Tories and their enthusiasms, capitalists' interest in solving the existential crisis of global heating is hardly more than a clear-sighted view of where future opportunities for (financial) profit lie. When profits are threatened, their interest can wane pretty fast.
 [^2]: My creation of the code in this repository was as a result of frustration at the shortcomings of my utility company. I've tried to confine these feelings to footnotes and to keep the main text more neutral.
 
+## Screenshots
+
+The module can be imported and used in other scripts, or it can just be run, at it is. In that case, the last section of the code, which is inside an `if __name__ == "__main__":` block, runs and puts up a minimal but interactive display of meter readings and consumption, for electricity and for gas. The repository contains sample data (from a short period around the time my smart meters were installed, and more recently) which can be used to demonstrate the some features of the module.
+
+![image-20211011092717712](/home/simon/.config/Typora/typora-user-images/image-20211011092717712.png)
+
+and
+
+![image-20211011092918328](/home/simon/.config/Typora/typora-user-images/image-20211011092918328.png)
+
+The last
+
 ## Aims
 
 - to give users better access to already-existing data on their own energy consumption

@@ -1,13 +1,13 @@
 """\
                             get_ovo_data.py
 
-The only way I found to automate everything after the login is based on:
+This is the only way I found to automate everything after the login. Based on:
 
 https://stackoverflow.com/questions/37121843/\
 how-to-get-a-json-response-from-a-google-chrome-selenium-webdriver-client
 
 Simon Duane
-2021-10-08
+2021-10-10
 """
 
 from datetime import datetime, timedelta
