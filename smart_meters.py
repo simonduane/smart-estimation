@@ -18,7 +18,7 @@ Returns (2N//k,)-shaped arrays of x, y  given (N,)-shaped arrays of x, y.
 
 For plotting group averages over the appropriate interval.
 First two intervals assumed to be of equal duration.
-Group size may be 1.
+Group size defaults to 1, giving data for a bar plot.
 """
     N = len(b)                                      # number of intervals
     a_group = np.reshape(a[:k*(N//k)],(N//k,k))[:,k-1]      # all the group ends
@@ -139,9 +139,9 @@ def read_ovo(name="2019-12", dataset=None,
     this_time = np.datetime64(name, "m")  # start of first interval, this period
     this_time += duration               # end of first interval, this period
     """\
-ovo PLEASE NOTE: ALL DATA WILL BE KEYED BY INTERVAL END TIMES: 
-METER READINGS WILL BE KEYED BY THEIR DATETIME (obviously)
-"USAGE" WILL BE KEYED BY THE END OF THE PERIOD IN WHICH THE CONSUMPTION HAPPENED
+ovo PLEASE NOTE: ALL DICTIONARY DATA ARE HERE KEYED BY DATETIME. 
+METER READINGS CAN BE RETRIEVED USING THEIR DATETIME (obviously)
+"USAGE" CAN BE RETRIEVED USING THE end DATETIME OF THE CONSUMPTION PERIOD
 """
     next_time = this_time + period      # end of first interval, next period
     all_times = np.arange(this_time, next_time, step=duration)
@@ -158,13 +158,13 @@ METER READINGS WILL BE KEYED BY THEIR DATETIME (obviously)
     """\
 ovo's error:
 
-THE FIRST CONSUMPTION IN AN ovo HALF-HOURLY FILE HAPPENED IN THE 30 MIN INTERVAL
-ENDING AT THE MIDNIGHT WHICH STARTS THE DAY - (ovo label it wrongly)
+EACH CONSUMPTION ITEM IN AN ovo HALF-HOURLY FILE OCCURED IN THE 30 MIN INTERVAL
+ending AT THE TIME LABELLED AS start - (ovo's label is wrong, plain and simple)
 
 THE FIRST PAIR OF METERREADINGS IN AN ovo DAILY FILE ARE THE OPENING AND CLOSING
 METER READINGS, BOTH NEAR MIDNIGHT, FOR THE FIRST DAY OF THE MONTH - (correct)
 
-(all ovo's times are UTC, no correction for daylight savings, which is good.)
+all ovo's times are UTC - there is no correction for daylight savings (GOOD).
 """
     return smart
 
