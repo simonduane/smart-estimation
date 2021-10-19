@@ -2,6 +2,24 @@
 
 A supply produces meter readings and a history of usage. Ideally, there will be a smart meter reading every day (at midnight) and smart usage data for every half-hour interval, but this cannot be taken for granted and, if data are missing, estimates must be made. Meter readings are obviously required for billing and, when Time of Use tariffs come in, usage data will be needed for billing too. Estimates that are used in billing must be reliable and it will be unacceptable for them to be wrong in an obvious way as, at the moment, seems to be happening regularly with the estimates that appear as part of feedback to users on their usage.
 
+### Some terminology, and conventions
+
+#### Meter reading
+
+The meter on a supply has a *register*, containing a *value* which changes with time. The value at any moment is the amount *supplied* up to that moment. The value is cumulative. A meter *reading* combines a register value with the date and time at which the register contained that value. It may be that the reading for a particular date (and perhaps also time) is needed but is not known (or was not recorded) - in that case the reading must be *estimated*.
+
+#### Consumption (a.k.a. "usage")
+
+An increase in the amount supplied, over a period of time, means that energy has been consumed, or used. Energy *consumption*, or energy *usage*, combines the increase (in the metered quantity, i.e. the increase in the cumulative register value) with the period of time during which that energy was consumed. That period is delimited by two moments, the start and end times of the period in which the energy was used. 
+
+#### Smart meter data
+
+Smart meters are set up to record usage automatically, as a set of 48 values per day where each value is the amount of energy consumed in one half-hour period. The first period starts at one midnight (UTC) and the last period ends 24 hours later, at the following midnight (UTC). The usage data for each day is retrieved by DCC more or less as soon as it is available, i.e. in the early hours of each morning. A meter reading is requested at the same time.
+
+However, smart meter data communications are not completely reliable and this is one reason why the meter reading for a particular date and time may not be available. In the same way, the usage data for a particular date may be incomplete or even missing altogether - in that case, the usage must be *modelled*. Sometimes the modelling is well-controlled (the model is "calibrated"), other times the modelling involves more significant assumptions, in particular that the pattern of usage hasn't changed. In that case, the usage must be *projected*: a model is used, and that model may have been calibrated on previous occasions but, this time the model is being used in a way that *does not include a current calibration*.
+
+My aim in defining things carefully like this is to clarify ideas and reduce the room for misunderstanding. Estimation applies to meter readings, modelling applies to usage. Estimated readings are always based on modelled usage. Sometimes the modelling is more reliable than others, i.e. when calibration is possible. Other times calibration is not possible and the modelling only gives a projection, or forecast. Generally, the lack of calibration is a temporary state of affairs. As soon as a new actual meter reading is available, what were previously projections of usage coming from an uncalibrated model can be corrected by using the new reading to determine a calibration factor for the model. Replacing those uncalibrated projections of usage, with the predictions of a calibrated model of usage amounts to making a correction (retrospectively) to previous estimates.
+
 ## Model-based estimation
 
 Estimates are best made using a model which can predict usage. The model must satisfy basic requirements, for instance that predicted usage must never exceed the supply rating (typically 25 kW for electricity, 6 m^3/hour for gas), and similarly must never be negative. But that's it, really, because the estimation process outlined here includes a *calibration* of the model[^(1)]. This calibration is what *can* make sure that model, i.e. all its predictions, are consistent with the customer's actual usage. In fact, the estimates can be surprisingly robust.
