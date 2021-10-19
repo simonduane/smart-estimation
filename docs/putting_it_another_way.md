@@ -1,6 +1,6 @@
-# Meter readings, usage and estimates
+# Meter readings, usage and estimation
 
-A supply produces meter readings and a history of usage. Ideally, there will be a smart meter reading every day (at midnight) and smart usage data for every half-hour interval, but this cannot be taken for granted and, if data are missing, estimates must be made. Meter readings are obviously required for billing and, when Time of Use tariffs come in, usage data will be needed for billing too. Estimates that are used in billing must be reliable and it will be unacceptable for them to be wrong in an obvious way as, at the moment, seems to be happening regularly with the estimates that appear as part of feedback to users on their usage.
+A supply produces meter readings and a history of usage. Ideally, there will be a smart meter reading every day (taken at midnight) and smart usage data for every half-hour interval, but this cannot be taken for granted and, if data are missing, estimates must be made. Meter readings are obviously required for billing and, when Time of Use tariffs come in, usage data will be needed for billing too. Estimates that are used in billing must be reliable and it will be unacceptable for them to be wrong in an obvious way as, at the moment, seems to be happening regularly with the estimates that appear as part of feedback to users on their usage.
 
 ### Some terminology, and conventions
 
@@ -10,23 +10,23 @@ The meter on a supply has a *register*, containing a *value* which changes with 
 
 #### Consumption (a.k.a. "usage")
 
-An increase in the amount supplied, over a period of time, means that energy has been consumed, or used. Energy *consumption*, or energy *usage*, combines the increase (in the metered quantity, i.e. the increase in the cumulative register value) with the period of time during which that energy was consumed. That period is delimited by two moments, the start and end times of the period in which the energy was used. 
+An increase in the amount supplied, over a period of time, means that energy has been consumed, or used. Energy *consumption*, or energy *usage*, combines that increase (in the metered quantity, i.e. the increase in the cumulative register value) with the period of time during which the energy was consumed. That period is delimited by two moments, the start and end times of the period in which the energy was used. 
 
 #### Smart meter data
 
-Smart meters are set up to record usage automatically, as a set of 48 values per day where each value is the amount of energy consumed in one half-hour period. The first period starts at one midnight (UTC) and the last period ends 24 hours later, at the following midnight (UTC). The usage data for each day is retrieved by DCC more or less as soon as it is available, i.e. in the early hours of each morning. A meter reading is requested at the same time.
+Smart meters are typically set up to record usage automatically, as a set of 48 values per day where each value is the amount of energy consumed in one half-hour period. I refer to these half-hour periods as *intervals*, and use the word *period* if the duration is not 30 minutes. The first of the 48 intervals starts at one midnight (UTC) and the last one ends 24 hours later, at the following midnight (UTC). The usage data for each day is retrieved by DCC more or less as soon as it is available, i.e. in the early hours of each morning. A meter reading is requested at the same time.
 
 However, smart meter data communications are not completely reliable and this is one reason why the meter reading for a particular date and time may not be available. In the same way, the usage data for a particular date may be incomplete or even missing altogether - in that case, the usage must be *modelled*. Sometimes the modelling is well-controlled (the model is "calibrated"), other times the modelling involves more significant assumptions, in particular that the pattern of usage hasn't changed. In that case, the usage must be *projected*: a model is used, and that model may have been calibrated on previous occasions but, this time, the model is being used in a way that *does not include a current calibration*.
 
 My aim in defining things carefully like this is to clarify ideas and reduce the room for misunderstanding. Estimation applies to meter readings, modelling applies to usage. Estimated readings are always based on modelled usage. Sometimes the modelling is more reliable than others, i.e. when calibration is possible. Other times calibration is not possible and the modelling only gives a projection, or forecast. Generally, the lack of calibration is a temporary state of affairs. As soon as a new actual meter reading is available, what were previously projections of usage coming from an uncalibrated model can be corrected by using the new reading to determine a calibration factor for the model. Replacing those uncalibrated projections of usage, with the predictions of a calibrated model of usage amounts to making a correction (retrospectively) to previous estimates.
 
-## Model-based estimation
+### Model-based estimation
 
 Estimates are best made using a model which can predict usage. The model must satisfy basic requirements, for instance that predicted usage must never exceed the supply rating (typically 25 kW for electricity, 6 m^3/hour for gas), and similarly must never be negative. But that's it, really, because the estimation process outlined here includes a *calibration* of the model[^(1)]. This calibration is what *can* make sure that model, i.e. all its predictions, are consistent with the customer's actual usage. In fact, the estimates can be surprisingly robust.
 
 [^(1)]:One way of understanding calibration is that it involves using a special factor, a fiddle factor. This factor is the ratio of what's wanted, divided by what one already has, and "calibration" involves multiplication by this ratio, which is known as a calibration coefficient (or, as a calibration factor). I can't think of a more general recipe for making a good correction than to multiply what you've got by what you want, and then to divide the result by what you had to start with. Think about this. Try it, and realise that it works. By all means, ask: What's the trick - it can't be that simple, surely? Well, I'm here to tell you it *is* that simple. Pearls of wisdom from a measurement standards professional of 30+ years experience, these, and all for free...
 
-## Extrapolation, interpolation and calibration
+### Extrapolation, interpolation and calibration
 
 Among all the actual meter readings for a supply, there will be an oldest reading and a newest reading, and many more readings in between. Some meter readings should be there but aren't, and these "missing" readings create gaps in the history - filling in these gaps amounts to a process of *interpolation*. Other readings may be "missing" from the time before the oldest available reading, or the newest reading may not be new enough to serve some purpose or other. Making estimates to replace missing readings such as these involves *extrapolation*. 
 
@@ -56,7 +56,7 @@ Those examples are real: my web browser put them on my screen at 2 pm on 18 Octo
 
 ### Estimation: the N step program 
 
-*What should N be? 10? 12? I could make it whatever you want*
+*What should N be? 7? 10? 12? I could make it whatever you want*
 
 1. Pick an actual meter reading $R_A = R(t_0)$ and, for the purpose of this explanation, it should not be the most recent one. It could even be that initial reading of zero, the one that was on the meter when it was first installed. $t_0$ is just the last time that value was in the meter's register.
 
