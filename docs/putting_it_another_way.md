@@ -60,7 +60,8 @@ Those examples are real: my web browser put them on my screen at 2 pm on 18 Octo
 
 ### Estimation: the N step program 
 
-*What should N be? 7? 10? 12? I could make it whatever you want*
+*How long should the list be? N=7? 10? 12?
+I could make it longer if you like the style.[^(0)]*
 
 1. Pick an actual meter reading $R_A = R(t_0)$ and, for the purpose of this explanation, it should not be the most recent one. It could even be that initial reading of zero, the one that was on the meter when it was first installed. $t_0$ is just the last time that value was in the meter's register.
 
@@ -81,6 +82,8 @@ Those examples are real: my web browser put them on my screen at 2 pm on 18 Octo
 9. That's an awful lot of estimated readings. One for every half-hour in that period. If the period straddles more than one day, then the intermediate moment(s) of midnight are times when we were lacking a smart meter reading. We are still lacking a smart reading, but you have just read an explanation of how to make the best estimate you can.
 
 10. The final step in this programme is to apply the programme, to translate the programme into a program.
+
+[^(0)]:But it'll never come out in **Paperback**. Please forgive the cultural reference - I'm a child of the Sixties.
 
 [^(2)]:It turns out that there is a technical restriction, that if a usage could in principle be non-zero, then the model prediction had better not be zero. This is because the calibration process in step 8 below involves dividing by a sum of model-predicted usage values. If the sum is only over ones that are definitely zero, this doesn't make sense. So define the problem away by making sure that no predicted usage is precisely zero, even if that happens quite often. The division is by the prediction, not by what actually happens.
 
