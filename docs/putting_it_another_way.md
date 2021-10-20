@@ -97,6 +97,4 @@ I could make it longer if you like the style.[^(0)]*
 
 There is room for playing here. The only constraint on the model is that it doesn't produce stupid predictions, ones which are beyond the physical limits of what's possible. What the model will never do is correctly predict the random variations in usage that happen from half-hour to half-hour and from one day to another. So, in validating a model against actual usage, don't be fooled into taking the patterns in actual usage too seriously. Some of them are just statistical noise. Taking those small random variations seriously enough to build them into the model is another kind of stupidity, and Ovo's current estimation process displays that stupidity too.
 
-What's more fun is to design models that actually do a reasonable job of predicting usage. It turns out that (provided one is careful not to take those small random variations seriously) this process of calibration will generate a good model automatically.
-
-Tune in next time to find out how...
+What's more fun is to design models that actually do a reasonable job of predicting usage. It turns out that (provided one is careful not to take those small random variations seriously) this process of calibration will generate a good model automatically. Tune in next time to find out how...
