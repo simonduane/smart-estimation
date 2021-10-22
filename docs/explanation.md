@@ -1,5 +1,7 @@
 # Python module `smart_meters.py`
 
+The following narrative is offered as some kind of commentary on what does what, sometimes on how it does it, and occasionally even on why it does it. A single file of free text is less constraining than comments in code, and I can make the naive assumption that the reader has probably read what comes before, and probably hasn't read what comes after.
+
 ## A note on JSON format
 
 This is used to specify the structure of smart meter data. The Ovo API is what forced me to learn about JSON, in which data objects are represented by strings. https://www.w3schools.com/js/js_json_intro.asp seems to be as good a resource as any, and what I learned is summarised in the table, which shows how JSON entities map onto Python objects in my code:
@@ -122,5 +124,5 @@ The primary estimate is of consumption - estimated meter readings are derived by
 
 The error in an estimated reading is entirely due to the errors in estimated consumption, and estimation of consumption relies on modelling. The model can be as crude as you like, but it has to respect physical constraints, such as not being negative (negative consumption would be registered on a different meter) and not exceeding the rating of the supply. For example my domestic electricity supply is rated at 100 A, and so the maximum demand is about 25 kW, and the half-hourly consumption value really can't be bigger than 12.5 kWh (otherwise a circuit breaker will trip). Similarly, I have a U6 gas meter, so the flow is unlikely to exceed 6 m^3 per hour and the half-hourly consumption value can't be much bigger than 3 m^3 (which is about 32 kWh), depending on the supply pipe size and the local supply pressure.
 
-*To be continued.*
+*To be continued, sooner rather than later...*
 
