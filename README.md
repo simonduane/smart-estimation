@@ -13,7 +13,7 @@ The module can be imported and used in other scripts, or it can just be run, at 
 
 and
 
-![image-20211011092918328](/home/simon/.config/Typora/typora-user-images/image-20211011092918328.png)
+![image-20211011092918328](./images/image-20211011092918328.png)
 
 The last
 
