@@ -1,3 +1,5 @@
+The following is intended as a reasonably complete explanation of how to do things. It's a little more abstract, and a little less focussed on the particular implementation to be found in the module and script(s) in this repo (compared to the explanation in this directory).
+
 # Meter readings, usage and estimation
 
 A supply produces meter readings and a history of usage. Ideally, there will be a smart meter reading every day (taken at midnight) and smart usage data for every half-hour interval, but this cannot be relied on and, if readings are missing, estimates must be made. Meter readings are obviously required for billing and, when Time of Use tariffs come in, usage data will be needed for billing too. Estimates for billing purposes **must be reliable** and it will be unacceptable for them to be wrong in an obvious way, as happens far too often for my taste with the estimates that appear as part of feedback on my energy usage.
