@@ -1,4 +1,4 @@
-The following is intended as a reasonably complete explanation of how to do things. It's a little more abstract, and a little less focussed on the particular implementation to be found in the module and script(s) in this repo (compared to the [explanation](https://thisfile) in this directory).
+The following is intended as a reasonably complete explanation of how to do things. It's a little more abstract, and a little less focussed on the particular implementation to be found in the module and script(s) in this repo, at least compared to the [explanation](https://github.com/simonduane/smart-estimation/blob/main/docs/explanation.md) in this directory.
 
 # Meter readings, usage and estimation
 
