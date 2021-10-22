@@ -9,13 +9,11 @@ Smart meters were introduced to help users reduce their consumption of energy[^1
 
 The module can be imported and used in other scripts, or it can just be run, at it is. In that case, the last section of the code, which is inside an `if __name__ == "__main__":` block, runs and puts up a minimal but interactive display of meter readings and consumption, for electricity and for gas. The repository contains sample data (from a short period around the time my smart meters were installed, and more recently) which can be used to demonstrate the some features of the module.
 
+Of course, screenshots aren't interactive in the same way...
+
 ![image-20211011092717712](./images/image-20211011092717712.png)
 
-and
-
 ![image-20211011092918328](./images/image-20211011092918328.png)
-
-The last
 
 ## Aims
 
