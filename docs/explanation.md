@@ -1,6 +1,6 @@
-# Python module `smart_meters.py`
+The following narrative is offered as some kind of commentary on what does what, sometimes on how it does it, and occasionally even on why it does it. A single file of free text is less constraining than comments in code, and I can make the naive assumption that the reader has probably read what comes before, and probably hasn't read what comes after. This is all very tied to the code in the repo. For a less concrete account of what is going on, see [the other file in this directory](https://).
 
-The following narrative is offered as some kind of commentary on what does what, sometimes on how it does it, and occasionally even on why it does it. A single file of free text is less constraining than comments in code, and I can make the naive assumption that the reader has probably read what comes before, and probably hasn't read what comes after.
+# Python module `smart_meters.py`
 
 ## A note on JSON format
 
