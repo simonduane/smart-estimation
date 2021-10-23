@@ -20,11 +20,13 @@ Partly in case speed of execution ever becomes an issue, but mainly for clarity 
 
 [^(1)]:Because I prefer to write list concatenation using the '+' operator instead of calling the function ```numpy.concatenate(a, b)``` with array arguments.
 
-## Interactive use of smart_meters
+## Interactive use of the smart_meters module
 
 The module can be used at the interactive Python prompt as well as in scripts.
 
-For example:
+For example[^(2)]:
+
+[^(2)]:I hope that any experienced users of GitHub looking at this repo will excuse my clumsiness: sometimes the module is present as a file that has a version number in the filename, ```smart_meters_04.py``` etc. In this case, one writes ```import smart_meters_04 as sm``` near the start. At the time of writing, the code is still at the stage of relatively rapid development, there are no users other than myself, and I feel free to break the interface between routines temporarily. It is among my aims that things settle down before the development slows down (I will remind myself of some better practices re versioning, and may even adopt them...)
 
 ```python
 >>> import numpy as np
