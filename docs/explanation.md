@@ -1,4 +1,4 @@
-The following narrative is offered as some kind of commentary on what does what, sometimes on how it does it, and occasionally even on why it does it. A single file of free text is less constraining than comments in code, and I can make the naive assumption that the reader has probably read what comes before, and probably hasn't read what comes after. This is all very tied to the code in the repo. For a less concrete account of what is going on, see [the other file in this directory](https://github.com/simonduane/smart-estimation/blob/main/docs/putting_it_another_way.md).
+The following narrative is offered as a kind of commentary on the code: on what does what, sometimes on how it does it, and occasionally even on why it does it. A single file of free text like this is less constraining than comments in code (although the code has some comments too), and in choosing what to say in this file, I can make the naive assumption that the reader has probably read what comes earlier in the file, but shouldn't assume they have read what comes after (with the possible exception of footnotes). The narrative is all very tied to the code in the repo. For a less concrete account of what is going on, see [the other file in this directory](https://github.com/simonduane/smart-estimation/blob/main/docs/putting_it_another_way.md).
 
 # Python module `smart_meters.py`
 
@@ -6,15 +6,19 @@ The following narrative is offered as some kind of commentary on what does what,
 
 This is used to specify the structure of smart meter data. The Ovo API is what forced me to learn about JSON, in which data objects are represented by strings. https://www.w3schools.com/js/js_json_intro.asp seems to be as good a resource as any, and what I learned is summarised in the table, which shows how JSON entities map onto Python objects in my code:
 
-| JSON                         | Python                      |
-| ---------------------------- | --------------------------- |
-| string                       | string (use double quotes)  |
-| number                       | int or float                |
-| object                       | dictionary (syntax matches) |
-| array                        | list (syntax matches)       |
-| boolean (true\|false)        | bool (True\|False)          |
-| null                         | None                        |
-| (strings are used for dates) | (use datetimes)             |
+| JSON                         | Python                          |
+| ---------------------------- | ------------------------------- |
+| string                       | string (use double quotes)      |
+| number                       | int or float                    |
+| object                       | dictionary (the syntax matches) |
+| array                        | list (the syntax matches)       |
+| boolean (true\|false)        | bool (True\|False)              |
+| null                         | None                            |
+| (strings are used for dates) | (use datetimes)                 |
+
+Partly in case speed of execution ever becomes an issue, but mainly for clarity in the way the code expresses my intentions, I use numpy arrays, which are distinct from lists. A JSON array always becomes a Python list, but not all Python lists are made into numpy arrays.[^(1)]
+
+[^(1)]:Because I prefer to write list concatenation using the '+' operator instead of calling the function ```numpy.concatenate(a, b)``` with array arguments.
 
 ## Interactive use of smart_meters
 
