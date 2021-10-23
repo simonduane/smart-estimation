@@ -67,7 +67,7 @@ Those examples are real: my web browser put them on my screen at 2 pm on 18 Octo
 *How long should the list be? N=7? 10? 12?
 I could make it longer if you like the style.[^(0)]*
 
-1. Pick an actual meter reading $R_A = R(t_0)$ and, for the purpose of this explanation, it should not be the most recent one. It could even be the initial reading of zero, the value in the register when the meter was first installed. $t_0$ is just the last time that register held that value.
+1. Pick an actual meter reading $R_A = R(t_0)$[^(note_on_using_maths)] and, for the purpose of this explanation, it should not be the most recent one. It could even be the initial reading of zero, the value in the register when the meter was first installed. $t_0$ is just the last time that register held that value.
 
 2. Define a model, and stick to it. See comments above for an explanation of what counts as a model.[^(2)] 
 
@@ -88,6 +88,8 @@ I could make it longer if you like the style.[^(0)]*
 10. The final step in this programme is to apply the programme, to translate the programme into a program.
 
 [^(0)]:But it'll never come out in **Paperback**. Please forgive the cultural reference - I'm a child of the Sixties.
+
+[^(note_on_using_maths)]:Unfortunately, GitHub doesn't display the maths formulae I have used here (it's like a simplified version of TeX or LaTeX). Other markdown editors do and so I have left the formulae as they are (they're not totally illegible as plain text) in case the reader sees this file in some other markdown renderer.
 
 [^(2)]:It turns out that there is a technical restriction, that if a usage could in principle be non-zero, then the model prediction had better not be zero. This is because the calibration process in step 8 below involves dividing by a sum of model-predicted usage values. If the sum is only over ones that are definitely zero, this doesn't make sense. So define the problem away by making sure that no predicted usage is precisely zero, even if that happens quite often. The division is by the prediction, not by what actually happens.
 
