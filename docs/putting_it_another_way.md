@@ -69,7 +69,7 @@ I could make it longer if you like the style.[^(0)]*
 
 1. Pick an actual meter reading $R_A = R(t_0)$[^(note_on_using_maths)] and, for the purpose of this explanation, it should not be the most recent one. It could even be the initial reading of zero, the value in the register when the meter was first installed. $t_0$ is just the last time that register held that value.
 
-2. Define a model, and stick to it. See comments above for an explanation of what counts as a model.[^(2)] 
+2. Define a model, and stick to it. See comments above for an explanation of what counts as an acceptable model.[^(2)] 
 
 3. Use the model to calculate (i.e. predict) the usage for every half-hour interval starting with that meter reading $R(t_0)$ and going forwards[^(3)]. For convenience, in this explanation, I label each interval with the time at which it starts. So, the initial interval starts at $t_0$ and ends at $t_1$, where $t_1$ is 30 minutes later than $t_0$. Given this sequence of times, $t_i$, the model generates a corresponding sequence of values, $u_p(t_i)$. These are the model-predicted usage values, i.e. $u_p(t_i)$ is the model's prediction of the energy that was (or will be) consumed between times $t_i$ and $t_{i+1}$.[^(4)] 
 
@@ -91,7 +91,7 @@ I could make it longer if you like the style.[^(0)]*
 
 [^(note_on_using_maths)]:Unfortunately, GitHub doesn't display the maths formulae I have used here (it's like a simplified version of TeX or LaTeX). Other markdown editors do and so I have left the formulae as they are (they're not totally illegible as plain text) in case the reader sees this file in some other markdown renderer.
 
-[^(2)]:It turns out that there is a technical restriction, that if a usage could in principle be non-zero, then the model prediction had better not be zero. This is because the calibration process in step 8 below involves dividing by a sum of model-predicted usage values. If the sum is only over ones that are definitely zero, this doesn't make sense. So define the problem away by making sure that no predicted usage is precisely zero, even if that happens quite often. The division is by the prediction, not by what actually happens.
+[^(2)]:It turns out that there is a technical restriction, that if a usage could in principle be non-zero, then the model prediction had better not be zero. This is because the calibration process in step 8 below involves dividing by a sum of model-predicted usage values. If the sum is only over ones that are definitely zero, this doesn't make sense. Such a model can't be fixed using a multiplicative calibration factor. So, make sure that the problem doesn't arise by only using models that predict usage that is strictly positive. These are the ones that can always be calibrated in this way.
 
 [^(3)]:Starting from a later reading, it is possible to go backwards instead. A similar logic applies, but it's potentially confusing to have both directions in your mind at the same time, especially at first, when it's all new anyway. Instead, get your head around the forwards case, completely, before asking yourself - how would this work going in the other direction...
 
