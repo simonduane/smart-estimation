@@ -82,7 +82,7 @@ The internet is a hostile environment and, up to a point, web servers make effor
 
 The script needs to be edited (lines 21-24) to contain information relating to your Ovo account and can then be run from a shell (command) prompt. It will work if you have more than one account (as I used to) but, as provided, the list of accounts in the script has only one item, and the dictionary of account numbers has only one key/value pair. 
 
-The Python selenium package is used to launch a web browser which the script then uses to navigate the API and capture data. Use of the script is possible once you have installed and configured selenium. More information at https://www.selenium.dev/selenium/docs/api/py/index.html.[^(3.5)]
+The Python selenium package is used to launch a web browser which the script then uses to navigate the API and capture data. Use of the script is possible once you have installed and configured selenium. More information at https://www.selenium.dev/selenium/docs/api/py/index.html. [^(3.5)]
 
 [^(3.5)]:I found some not quite up to date information online, where Ovo user(s) gave examples of what worked for them in using the API but, when I copied these, I couldn't get them to work. Using selenium was the first (and only) approach that worked for me. Your mileage may vary, etc.
 
